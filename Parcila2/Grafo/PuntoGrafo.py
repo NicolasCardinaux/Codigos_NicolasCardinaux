@@ -17,12 +17,10 @@ starwarschar = ["Luke Skywalker", "Darth Vader", "Yoda", "Boba Fett", "C 3PO", "
 for i in starwarschar:
     graph.insert_vertice(i)
 
-#!a) cada vértice debe almacenar el nombre de un personaje, las aristas representan lacantidad de episodios en los que aparecieron juntos ambos personajes que se relacionan; 
+#!a) cada vértice debe almacenar el nombre de un personaje, las aristas representan la cantidad de episodios en los que aparecieron juntos ambos personajes que se relacionan; 
 print('Punto a')
 j=0
 
-#Esto une un char con otro char, es secuencial
-#Los capitulos que comparten no son lore accurate usa un randint para generarlo
 
 for i in starwarschar:
     position = graph.search_vertice(i)
