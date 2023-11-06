@@ -50,8 +50,8 @@ tree_min = graph.kruskal()
 
 i=0
 
-#b) hallar el árbol de expansión minino y determinar si contiene a Yoda; 
-#c) determinar cuál es el número máximo de episodio que comparten dos personajes, y quienes son. 
+#!b) hallar el árbol de expansión minino y determinar si contiene a Yoda; 
+#!c) determinar cuál es el número máximo de episodio que comparten dos personajes, y quienes son. 
 print('Puntos b y c')
 
 max_value = 0
