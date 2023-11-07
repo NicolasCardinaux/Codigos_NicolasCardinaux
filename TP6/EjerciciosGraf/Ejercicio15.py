@@ -1,15 +1,14 @@
-# Se requiere implementar un grafo para almacenar las siete maravillas arquitectónicas moder-
-# nas y naturales del mundo, para lo cual se deben tener en cuenta las siguientes actividades:
+''' Se requiere implementar un grafo para almacenar las siete maravillas arquitectónicas moder-
+nas y naturales del mundo, para lo cual se deben tener en cuenta las siguientes actividades:
 
-# a. de cada una de las maravillas se conoce su name, país de ubicación (puede ser más de
-# uno en las naturales) y types (natural o arquitectónica);
-# b. cada una debe estar relacionada con las otras seis de su types, para lo que se debe almacenar
-# la distancia que las separa;
-# c. hallar el árbol de expansión mínimo de cada types de las maravillas;
-# d. determinar si existen países que dispongan de maravillas arquitectónicas y naturales;
-# e. determinar si algún país tiene más de una maravilla del mismo types;
-# f. deberá utilizar un grafo no dirigido.
-# Importa la clase Grafo01 del módulo grafo y la función randint del módulo random
+a. de cada una de las maravillas se conoce su name, país de ubicación (puede ser más de
+uno en las naturales) y types (natural o arquitectónica);
+b. cada una debe estar relacionada con las otras seis de su types, para lo que se debe almacenar
+la distancia que las separa;
+c. hallar el árbol de expansión mínimo de cada types de las maravillas;
+d. determinar si existen países que dispongan de maravillas arquitectónicas y naturales;
+e. determinar si algún país tiene más de una maravilla del mismo types;
+f. deberá utilizar un grafo no dirigido.'''
 from grafo import Grafo01
 from random import randint
 
