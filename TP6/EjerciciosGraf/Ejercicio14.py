@@ -14,77 +14,76 @@ determinar cuántos metros de cable de red se necesitan para conectar el router 
 Smart Tv.'''
 from grafo import Grafo01
 from random import uniform, randint
+# 14. Implementar sobre un grafo no dirigido los algoritmos necesario para dar solución a las si-
+# guientes tareas:
 
-# Crear un grafo no dirigido
-graph = Grafo01(dirigido=False)
+mi_grafo = Grafo01(dirigido=False)
 
-# Definir los nombres de los ambientes de la casa
-habitaciones = ["cocina", "comedor", "cochera", "quincho", "baño 1", "baño 2", "habitación 1", "habitación 2", "sala de estar", "terraza", "patio"]
+# a. cada vértice representar un ambiente de una casa: cocina, comedor, cochera, quincho,
+# baño 1, baño 2, habitación 1, habitación 2, sala de estar, terraza, patio;
+mi_grafo.insert_vertice('cocina')
+mi_grafo.insert_vertice('comedor')
+mi_grafo.insert_vertice('cochera')
+mi_grafo.insert_vertice('quincho')
+mi_grafo.insert_vertice('baño 1')
+mi_grafo.insert_vertice('baño 2')
+mi_grafo.insert_vertice('habitación 1')
+mi_grafo.insert_vertice('habitación 2')
+mi_grafo.insert_vertice('sala de estar')
+mi_grafo.insert_vertice('terraza')
+mi_grafo.insert_vertice('patio')
 
-# Insertar vértices en el grafo para representar los ambientes de la casa
-for i in habitaciones:
-    graph.insert_vertice(i)
+# b. cargar al menos tres aristas a cada vértice, y a dos de estas cárguele cinco, el peso de la aris-
+# ta es la distancia entre los ambientes, se debe cargar en metros;
 
-j = 0
+mi_grafo.insert_arist('cocina', 'cochera', 10)
+mi_grafo.insert_arist('cocina', 'comedor', 10)
+mi_grafo.insert_arist('cocina', 'quincho', 5)
+mi_grafo.insert_arist('baño 1', 'comedor', 7)
+mi_grafo.insert_arist('baño 1', 'cochera', 3)
+mi_grafo.insert_arist('baño 1', 'quincho', 3)
+mi_grafo.insert_arist('baño 2', 'comedor', 11)
+mi_grafo.insert_arist('baño 2', 'cochera', 7)
+mi_grafo.insert_arist('baño 2', 'quincho', 6)
+mi_grafo.insert_arist('habitación 1', 'terraza', 10)
+mi_grafo.insert_arist('habitación 1', 'patio', 10)
+mi_grafo.insert_arist('habitación 1', 'comedor', 11)
+mi_grafo.insert_arist('habitación 2', 'terraza', 9)
+mi_grafo.insert_arist('habitación 2', 'patio', 4)
+mi_grafo.insert_arist('habitación 2', 'comedor', 4)
+mi_grafo.insert_arist('sala de estar', 'terraza', 11)
+mi_grafo.insert_arist('sala de estar', 'patio', 6)
+mi_grafo.insert_arist('sala de estar', 'comedor', 5)
+mi_grafo.insert_arist('sala de estar', 'baño 1', 6)
+mi_grafo.insert_arist('sala de estar', 'baño 2', 5)
 
-# Cargar al menos tres aristas a cada vértice, con pesos aleatorios
-for i in habitaciones:
-    position = graph.search_vertice(i)
-    point = graph.get_element_by_index(position)
+print('--------------------------------------------------------------------------------')
 
-    if point[1].size() < 3:
-        k = 0
-        while j == 0:
-            if k >= len(habitaciones):
-                j = 1
-            else:
-                place = habitaciones[k]
-                positionb = graph.search_vertice(place)
-                pointb = graph.get_element_by_index(positionb)
-                checker = graph.is_adyacent(point[0], pointb[0])
-                graph.mark_as_not_visited()
-
-                if pointb[1].size() < 3 and point[0] != pointb[0] and not checker:
-                    value = randint(1, 11)
-                    graph.insert_arist(point[0], pointb[0], value)
-
-                    if point[1].size() == 3:
-                        j = 1
-
-                k += 1
-        j = 0
-
-# Cargar algunas aristas adicionales entre ambientes específicos
-val = uniform(1, 11)
-value = randint(1, 11)
-graph.insert_arist("patio", "cochera", value)
-val = uniform(1, 11)
-value = randint(1, 11)
-graph.insert_arist("cochera", "sala de estar", value)
-val = uniform(1, 11)
-value = randint(1, 11)
-graph.insert_arist("baño 1", "comedor", value)
-val = uniform(1, 11)
-value = randint(1, 11)
-graph.insert_arist("comedor", "terraza", value)
-
-# Calcular el árbol de expansión mínima y la cantidad de metros de cables necesarios
-graph.mark_as_not_visited()
-min_exp = graph.kruskal()
+# c. obtener el árbol de expansión mínima
+print('Punto C:')
+min_exp = mi_grafo.kruskal()
+print(min_exp)
 total_cable = 0
 for i in min_exp:
-    k = i.split(";")
+    k=i.split(";")
     for j in k:
-        total_cable += int(j.split("-")[2])
-print(f"Se necesitan {total_cable} metros de cable para conectar todos los ambientes")
+        total_cable = total_cable + int(j.split("-")[2])
+print()
+print(f"Se necesitan {total_cable} metros de cable, para conectar todos los ambientes")
 
-# Calcular el camino más corto desde la habitación 1 hasta la sala de estar y la cantidad de metros de cable de red necesarios
-graph.mark_as_not_visited()
-path = graph.dijkstra("habitación 1", "sala de estar")
-i = 0
+print('--------------------------------------------------------------------------------')
+
+# d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para
+# determinar cuántos metros de cable de red se necesitan para conectar el router con el
+# Smart Tv.
+
+path = mi_grafo.dijkstra("habitación 1","sala de estar")
+i=0
 while i != 1:
     value = path.pop()
     if value[0] == "sala de estar":
         i = 1
+print('Punto D:')
+print(f"Se necesitan {value[1]} metros para conectar el router con el Smart TV")
 
-print(f"Se necesitan {value[1]} metros para conectar el router con el Smart TV desde la habitación 1 hasta la sala de estar")
+print('--------------------------------------------------------------------------------')
